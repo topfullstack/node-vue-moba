@@ -33,9 +33,9 @@ export default {
     async save(){
       let res
       if (this.id) {
-        res = await this.$http.put(`categories/${this.id}`, this.model)
+        res = await this.$http.put(`rest/categories/${this.id}`, this.model)
       } else {
-        res = await this.$http.post('categories', this.model)
+        res = await this.$http.post('rest/categories', this.model)
       }
       this.$router.push('/categories/list')
       this.$message({
@@ -44,11 +44,11 @@ export default {
       })
     },
     async fetch(){
-      const res = await this.$http.get(`categories/${this.id}`)
+      const res = await this.$http.get(`rest/categories/${this.id}`)
       this.model = res.data
     },
     async fetchParents(){
-      const res = await this.$http.get(`categories`)
+      const res = await this.$http.get(`rest/categories`)
       this.parents = res.data
     },
     

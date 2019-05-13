@@ -23,8 +23,7 @@
 1. 图片上传 (multer)
 
 1. 英雄管理
-1. 编辑英雄
-1. 装备的多选 (el-select, multiple)
+1. 编辑英雄 (关联,多选,el-select, multiple)
 1. 技能的编辑
 
 1. 文章管理

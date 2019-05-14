@@ -12,7 +12,8 @@
     "core-js": "^2.6.5",
     "element-ui": "^2.4.5",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vue2-editor": "^2.6.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",

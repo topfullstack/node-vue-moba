@@ -43,4 +43,27 @@ module.exports = app => {
     file.url = `http://localhost:3000/uploads/${file.filename}`
     res.send(file)
   })
+
+  app.post('/admin/api/login', async (req, res) => {
+    const { username, password } = req.body
+    // 1.根据用户名找用户
+    const AdminUser = require('../../models/AdminUser')
+    const user = await AdminUser.findOne({username}).select('+password')
+    if (!user) {
+      return res.status(422).send({
+        message: '用户不存在'
+      })
+    }
+    // 2.校验密码
+    const isValid = require('bcrypt').compareSync(password, user.password)
+    if (!isValid) {
+      return res.status(422).send({
+        message: '密码错误'
+      })
+    }
+    // 3.返回token
+    const jwt = require('jsonwebtoken')
+    const token = jwt.sign({ id: user._id}, app.get('secret'))
+    res.send({token})
+  })
 }

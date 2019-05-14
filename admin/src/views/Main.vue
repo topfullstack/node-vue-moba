@@ -26,7 +26,11 @@
             <el-menu-item index="/articles/create">新建文章</el-menu-item>
             <el-menu-item index="/articles/list">文章列表</el-menu-item>
           </el-menu-item-group>
-          
+          <el-menu-item-group>
+            <template slot="title">广告位</template>
+            <el-menu-item index="/ads/create">新建广告位</el-menu-item>
+            <el-menu-item index="/ads/list">广告位列表</el-menu-item>
+          </el-menu-item-group>
         </el-submenu>
       </el-menu>
     </el-aside>

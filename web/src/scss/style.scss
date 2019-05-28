@@ -1,0 +1,14 @@
+@import "./reset";
+@import "./theme";
+
+
+.sprite {
+  background: url(../assets/images/index.png) no-repeat;
+  background-size: 375px auto;
+  display: inline-block;
+  &.sprite-board {
+    width: 26px;
+    height: 21px;
+    background-position: -34px -5px;
+  }
+}

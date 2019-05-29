@@ -1,11 +1,17 @@
-.hello h1 {}
-.hello h3 {}
-
-.hello {
-  h1 {
-    color: red;
-  }
-  h3 {
-    color: blue;
-  }
+// reset
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+html {
+  font-size: 13px;
+}
+body {
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  background: #f1f1f1;
+}
+a {
+  color: #999;
 }

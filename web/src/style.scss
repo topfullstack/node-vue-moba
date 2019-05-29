@@ -2,7 +2,6 @@
 * {
   box-sizing: border-box;
   outline: none;
-  transition: all 0.1s;
 }
 html {
   font-size: 13px;
@@ -10,7 +9,7 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.2em;
-  -webkit-font-smoothing: antialiased;
+  // -webkit-font-smoothing: antialiased;
   margin:0;
   background: #f1f1f1;
 }
@@ -214,7 +213,7 @@ $spacing-sizes: (0: 0, 1: 0.25, 2: 0.5, 3: 1, 4: 1.5, 5: 3);
 
 // sprite
 .sprite {
-  background: url(../assets/images/index.png) no-repeat;
+  background: url(./assets/images/index.png) no-repeat;
   background-size: 100vw auto;
   display: inline-block;
   &.sprite-board {

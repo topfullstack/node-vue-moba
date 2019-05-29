@@ -132,7 +132,7 @@ export default {
   },
   methods: {
     async fetchNewsLists() {
-      const res = await fetch("http://192.168.50.110:3000/web/api/lists/news");
+      const res = await fetch("http://localhost:3000/web/api/lists/news");
       const data = await res.json();
       this.newsLists = data.children;
     }

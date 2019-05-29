@@ -22,7 +22,7 @@
       </div>
     </div>
     <!-- end of nav -->
-    <swiper>
+    <swiper :options="{pagination: {el: '.pagination-main'}}">
       <swiper-slide>
         <img class="w-100" src="./assets/images/c9d4249b1872277b3db58ce7ed32e8e4.jpeg">
       </swiper-slide>
@@ -32,112 +32,113 @@
       <swiper-slide>
         <img class="w-100" src="./assets/images/c9d4249b1872277b3db58ce7ed32e8e4.jpeg">
       </swiper-slide>
+
+      <div class="swiper-pagination pagination-main text-right p-2 px-3" slot="pagination"></div>
     </swiper>
     <!-- end of swiper -->
 
     <div class="entry-list bg-white mt-3 border-top border-bottom">
-      <div class="d-flex flex-wrap pb-3">
-        <div class="item mt-3 text-center" style="width: 25%;" v-for="n in 10" :key="n">
+      <div class="d-flex flex-wrap pb-3 ov-hidden" :style="{height: entryHeight}">
+        <div class="item mt-3 text-center text-info" style="width: 25%;" v-for="n in 10" :key="n">
           <i class="sprite sprite-board"></i>
           <div class="pt-1">爆料站</div>
         </div>
       </div>
-      <div class="bg-light text-center py-2">
-        <small>收起</small>
+      <div class="bg-light text-center py-2" 
+      @click="entryHeight = (entryHeight === '5rem') ? 'auto' : '5rem'">
+        <small> {{entryHeight === '5rem' ? '展开' : '收起'}}</small>
       </div>
     </div>
     <!-- end of nav icons -->
 
-    <!-- <div class="card p-3 bg-white mt-3">
-      <div class="card-header d-flex jc-between pb-3 border-bottom">
-        <div class="d-flex ai-center card-title">
-          o
-          <div class="ml-2">阿斯顿发</div>
-        </div>
-        <div>
-          <b>···</b>
-        </div>
-      </div>
-      <div class="card-body pt-3">
-        <div class="nav d-flex jc-between">
-          <div class="nav-item active">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-        </div>
-
-        <div class="news-list mt-3">
-          <div class="py-2 d-flex jc-between" v-for="n in 6" :key="n">
-            <div>[公告] | 5月28日全服不停机更新公告</div>
-            <small class="text-grey">05/27</small>
+    <list-card title="新闻列表" :categories="newsLists">
+      <template #list="{category, index}">
+        <div class="mt-2">
+          <div class="py-2 d-flex jc-between" v-for="(item,i) in category.latestNews" :key="i">
+            <div class="text-ellipse">
+            <span class="text-info">[{{item.categoryName || category.name}}]</span>
+             | {{item.title}}</div>
+            <small class="text-grey">{{item.createdAt | shortDate('/')}}</small>
           </div>
         </div>
-      </div>
-    </div>-->
-    <card title="新闻资讯">
-      
-      <tabs v-model="newsCat" :items="['热门', '新闻', '公告', '公告', '公告']"></tabs>
-      <div class="news-list mt-2">
-        <div class="py-2 d-flex jc-between" v-for="n in 6" :key="n">
-          <div>[公告] | 5月28日全服不停机更新公告</div>
-          <small class="text-grey">05/27</small>
-        </div>
-      </div>
-    </card>
+      </template>
+    </list-card>
 
     <!-- end of news -->
-    <card title="英雄列表">
-      
-    </card>
 
-    <div class="card p-3 bg-white mt-3">
-      <div class="card-header pb-3 border-bottom">
-        <div class="d-flex d-flex jc-between pb-3">
-          <div class="d-flex ai-center card-title">
-            o
-            <div class="ml-2">英雄列表</div>
-          </div>
-          <div>
-            <b>···</b>
-          </div>
-        </div>
-        <img class="w-100" src="./assets/images/89517772414729.jpg" alt>
-      </div>
-      <div class="card-body pt-3">
-        <div class="nav d-flex jc-between">
-          <div class="nav-item active">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-          <div class="nav-item">热门</div>
-        </div>
-
-        <div class="hero-list d-flex flex-wrap" style="margin:0.5rem -0.5rem 0 -0.5rem;">
-          <div class="hero-item text-center p-2" style="width:20%;" v-for="n in 10" :key="n">
+    <list-card title="英雄列表" :categories="newsLists">
+      <template #header>
+        <img class="w-100 mt-3" src="./assets/images/89517772414729.jpg" alt>
+      </template>
+      <template #list="{category, index}">
+        <div class="d-flex flex-wrap" style="margin:0.5rem -0.5rem 0 -0.5rem;">
+          <div
+            class="text-center p-2"
+            style="width:20%;"
+            v-for="(item,i) in category.latestNews"
+            :key="i"
+          >
             <img src="./assets/images/106.jpg" class="w-100" alt>
             <div>后羿</div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </list-card>
     <!-- end of heroes -->
+
+    <list-card title="精彩视频" :categories="newsLists">
+      <template #list="{category, index}">
+        <div class="d-flex flex-wrap" style="margin:0.5rem -0.5rem 0 -0.5rem;">
+          <div class="p-2" style="width:50%;" v-for="(item,i) in category.latestNews" :key="i">
+            <img src="./assets/images/106.jpg" class="w-100" height="100" alt>
+            <div class>{{item.title.substr(0, 25)}}</div>
+            <div class="d-flex jc-between text-secondary fs-sm">
+              <div>- 27.4万</div>
+              <div>{{item.createdAt | shortDate}}</div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </list-card>
+
+    <list-card title="图文攻略" :categories="newsLists">
+      <template #list="{category, index}">
+        <div class="d-flex flex-wrap" style="margin:0.5rem -0.5rem 0 -0.5rem;">
+          <div class="d-flex p-2 jc-between" v-for="(item,i) in category.latestNews" :key="i">
+            <img src="./assets/images/106.jpg" style="width:10em;" height="82" alt>
+            <div class="h-100 d-flex flex-column pl-2 flex-1">
+              <div class="">{{item.title.substr(0, 25)}}</div>
+              <div class="flex-1 text-secondary fs-sm py-1">{{item.title.substr(0, 25)}}</div>
+              <div class="fs-sm text-grey">{{item.createdAt | shortDate}}</div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </list-card>
   </div>
 </template>
 
 <script>
-import MCard from "./components/Card.vue";
-import MNav from "./components/Nav.vue";
+import ListCard from "./components/ListCard.vue";
 
 export default {
   name: "app",
-  components: { Card, Tabs },
-  data(){
+  components: { ListCard },
+  data() {
     return {
-      newsCat: 0
+      entryHeight: '5rem',
+      newsLists: []
+    };
+  },
+  methods: {
+    async fetchNewsLists() {
+      const res = await fetch("http://192.168.50.110:3000/web/api/lists/news");
+      const data = await res.json();
+      this.newsLists = data.children;
     }
+  },
+  created() {
+    this.fetchNewsLists();
   }
 };
 </script>
@@ -148,6 +149,16 @@ export default {
     border-left: 1px solid #d4d9de;
     &:nth-child(4n + 1) {
       border: none;
+    }
+  }
+}
+.pagination-main {
+  .swiper-pagination-bullet {
+    background: #fff;
+    opacity: 1;
+    border-radius: 2px;
+    &.swiper-pagination-bullet-active {
+      background: #4b67af;
     }
   }
 }

@@ -1,14 +1,230 @@
-@import "./reset";
-@import "./theme";
+// reset
+* {
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.1s;
+}
+html {
+  font-size: 13px;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  -webkit-font-smoothing: antialiased;
+  margin:0;
+  background: #f1f1f1;
+}
+a {
+  color: #999;
+}
+@media (min-width: 768px) {
+  html{
+    font-size: 2rem;
+  }
+}
 
+// colors
+$colors: (
+  primary: #db9e3f,
+  "white": #fff,
+  light: #f7f7f7,
+  light-1: #f9f9f9,
+  "grey": #999,
+  secondary: #666,
+  info: #464f73,
+  dark: #222
+);
 
+$border-color: #d4d9de;
+
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+// width height
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+// border
+@each $item in (top, right, bottom, left) {
+  .border-#{$item}{
+    border-#{$item}: 0.0385rem solid $border-color;
+  }
+}
+
+// display
+$display-types: (
+  flex: flex,
+  block: block,
+  inline-block: inline-block,
+  inline: inline
+);
+@each $typeKey, $type in $display-types {
+  .d-#{$typeKey} {
+    display: $type;
+  }
+}
+
+@each $var in (hidden, auto, scroll) {
+  .ov-#{$var}{
+    overflow: $var;
+  }
+}
+
+// text
+@each $key in (left, center, right) {
+  .text-#{$key}{
+    text-align: $key !important;
+  }
+}
+.text-ellipse {
+  width: 78vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+// font size
+$base-font-size: 1rem;
+$font-sizes: (xs: 0.75, sm: 0.8, md: 1, lg: 1.25, xl: 1.5, xxl: 2);
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey}{
+    font-size: $size * $base-font-size;
+  }
+}
+
+// flex
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-column {
+  flex-direction: column;
+}
+$flex-jc: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch,
+  between: space-between,
+  around: space-around
+);
+$flex-ai: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch
+);
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+.flex-1 {
+  flex: 1;
+}
+// spacing
+$spacing-types: (m: margin, p: padding);
+$spacing-direction: (t: top, r: right, b: bottom, l: left);
+$spacing-base: 1rem;
+$spacing-sizes: (0: 0, 1: 0.25, 2: 0.5, 3: 1, 4: 1.5, 5: 3);
+@each $typeKey, $type in $spacing-types {
+  // m-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey}{
+      #{$type}: $size * $spacing-base;
+    }
+  }
+  // mx-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}x-#{$sizeKey}{
+      #{$type}-left: $size * $spacing-base;
+      #{$type}-right: $size * $spacing-base;
+    }
+  }
+  // my-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}y-#{$sizeKey}{
+      #{$type}-top: $size * $spacing-base;
+      #{$type}-bottom: $size * $spacing-base;
+    }
+  }
+
+  // mt-1 ...
+  @each $directionKey, $direction in $spacing-direction {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+        #{$type}-#{$direction}: $size * $spacing-base;
+      }
+    }
+  }
+}
+
+// button
+.btn {
+  border:none;
+  padding: 0.5rem 1rem;
+  
+  &.btn-sm {
+    font-size: 0.7em;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.1rem;
+  }
+}
+// nav
+.nav {
+  .nav-item {
+    border-bottom: 0.2rem solid transparent;
+    &.active {
+      padding-bottom: 0.2rem;
+      color: map-get($colors, 'primary');
+      border-bottom-color: map-get($colors, 'primary');
+    }
+  }
+  &.is-inverse {
+    .nav-item {
+      &.active {
+        color: map-get($colors, 'white');
+        border-bottom-color: map-get($colors, 'white');
+      }
+    }
+  }
+}
+
+// card
+.card {
+  border-bottom: 0.05rem solid $border-color;
+  .card-header {
+    .card-title {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+// sprite
 .sprite {
   background: url(../assets/images/index.png) no-repeat;
-  background-size: 375px auto;
+  background-size: 100vw auto;
   display: inline-block;
   &.sprite-board {
-    width: 26px;
-    height: 21px;
-    background-position: -34px -5px;
+    width: 2rem;
+    height: 1.6154rem;
+    background-position: 9.728% 1.266%;
+  }
+  &.sprite-arrow-top {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
   }
 }

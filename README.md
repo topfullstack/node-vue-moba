@@ -36,6 +36,7 @@
 1. 登录接口 (jwt,jsonwebtoken)
 1. 服务端登录校验
 1. 客户端路由限制 (beforeEach, meta)
+1. 上传文件的登录校验 (el-upload, headers)
 
 ## 三、移动端网站
 

@@ -10,9 +10,17 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
 import dayjs from 'dayjs'
+import router from './router'
 
 Vue.filter('shortDate', (val, delimiter = '-') => dayjs(val).format(`MM${delimiter}DD`))
 
+import axios from 'axios'
+
+Vue.prototype.$http = axios.create({
+  baseURL: 'http://localhost:3000/web/api'
+})
+
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')

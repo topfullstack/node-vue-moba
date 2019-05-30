@@ -33,5 +33,8 @@ module.exports = app => {
     })
     res.send(data)
   })
+  router.get('/articles/:id', async (req, res) => {
+    res.send(await News.findById(req.params.id))
+  })
   app.use("/web/api", router)
 }

@@ -1,3 +1,5 @@
+@import './variables';
+
 // reset
 * {
   box-sizing: border-box;
@@ -11,21 +13,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.2em;
   background: #f1f1f1;
+  -webkit-font-smoothing: antialiased;
 }
 a {
   color: #999;
 }
 
-// colors
-$colors: (
-  'primary': #db9e3f,
-  'white': #fff,
-  'light': #f9f9f9,
-  'grey': #999,
-  'dark-1': #343440,
-  'dark': #222,
-  'black': #000,
-);
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
     color: $color;
@@ -37,29 +30,22 @@ $colors: (
 // text align
 @each $var in (left, center, right) {
   .text-#{$var} {
-    text-align: $var;
+    text-align: $var !important;
   }
 }
-// font size
-$base-font-size: 1rem;
-$font-sizes: (
-  xs: 0.7692,
-  //10px
-    sm: 0.9231,
-  //12px
-    md: 1,
-  //13px
-    lg: 1.0769,
-  //14px
-    xl: 1.2308,
-  //16px,,,,
-);
+
 @each $sizeKey, $size in $font-sizes {
   .fs-#{$sizeKey} {
     font-size: $size * $base-font-size;
   }
 }
-
+// width, height
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
 // flex
 .d-flex {
   display: flex;
@@ -67,24 +53,13 @@ $font-sizes: (
 .flex-column {
   flex-direction: column;
 }
-$flex-jc: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  between: space-between,
-  around: space-around,
-);
+
 @each $key, $value in $flex-jc {
   .jc-#{$key} {
     justify-content: $value;
   }
 }
-$flex-ai: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  stretch: stretch,
-);
+
 @each $key, $value in $flex-ai {
   .ai-#{$key} {
     align-items: $value;
@@ -97,28 +72,6 @@ $flex-ai: (
   flex-grow: 1;
 }
 
-// spacing
-// 0-5: 0
-// .mt-1  => margin top  .pb-2
-$spacing-types: (
-  m: margin,
-  p: padding,
-);
-$spacing-directions: (
-  t: top,
-  r: right,
-  b: bottom,
-  l: left,
-);
-$spacing-base-size: 1rem;
-$spacing-sizes: (
-  0: 0,
-  1: 0.25,
-  2: 0.5,
-  3: 1,
-  4: 1.5,
-  5: 3,
-);
 // m-0, mx-0
 @each $typeKey, $type in $spacing-types {
   // .m-1
@@ -146,4 +99,22 @@ $spacing-sizes: (
       }
     }
   }
+}
+// button
+.btn {
+  border:none;
+  border-radius: 0.1538rem;
+  font-size: map-get($font-sizes, 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+// nav
+.nav {
+  .nav-item {
+    border-bottom: 3px solid transparent;
+    padding-bottom: 0.2rem;
+    &.active {
+      border-bottom: 3px solid #fff;
+    }
+  }
+  
 }

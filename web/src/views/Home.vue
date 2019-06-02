@@ -28,44 +28,20 @@
     </div>
     <!-- end of nav icons -->
 
-    <m-card icon="menu1" title="新闻资讯">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
+    <m-list-card icon="menu1" title="新闻资讯" :categories="newsCats">
+      <template #items="{category}">
+        <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.date}}</span>
         </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-      </div>
-      <div class="pt-3">
-        <swiper>
-          <swiper-slide v-for="m in 5" :key="m">
-            <div class="py-2" v-for="n in 5" :key="n">
-              <span>[新闻]</span>
-              <span>|</span>
-              <span>夏日新版本“稷下星之队”即将6月上线</span>
-              <span>06/02</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
+      </template>
+    </m-list-card>
+
     <m-card icon="menu1" title="英雄列表"></m-card>
     <m-card icon="menu1" title="精彩视频"></m-card>
     <m-card icon="menu1" title="图文攻略"></m-card>
-    <m-card icon="menu1" title="英雄列表"></m-card>
-    <m-card icon="menu1" title="英雄列表"></m-card>
-    <m-card icon="menu1" title="英雄列表"></m-card>
-
   </div>
 </template>
 
@@ -77,7 +53,49 @@ export default {
         pagination: {
           el: ".pagination-home"
         }
-      }
+      },
+      newsCats: [
+        {
+          name: "热门",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "6月2日全服不停机更新公告",
+            date: "06/01"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "新闻",
+            title: "6月2日全服不停机更新公告",
+            date: "06/01"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "新闻",
+            title: "6月2日全服不停机更新公告",
+            date: "06/01"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "新闻",
+            title: "6月2日全服不停机更新公告",
+            date: "06/01"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "新闻",
+            title: "6月2日全服不停机更新公告",
+            date: "06/01"
+          }))
+        }
+      ]
     };
   }
 };

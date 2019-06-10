@@ -18,6 +18,7 @@
     "inflection": "^1.12.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.6",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "require-all": "^3.0.0"
   }
 }

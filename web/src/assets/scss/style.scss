@@ -18,6 +18,12 @@ body {
 a {
   color: #999;
 }
+p{
+  line-height: 1.5em;
+}
+img{
+  max-width: 100%;
+}
 
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
@@ -117,6 +123,13 @@ a {
   border-radius: 0.1538rem;
   font-size: map-get($font-sizes, 'sm') * $base-font-size;
   padding: 0.2rem 0.6rem;
+
+  &.btn-lg{
+    padding: 0.8rem 1rem;
+    border-radius: 0.4615rem;
+    font-size: 1.0769rem;
+    border: 1px solid map-get($colors, 'light-0');
+  }
 }
 // nav
 .nav {
@@ -155,4 +168,14 @@ a {
     height: 0.7692rem;
     background-position: 38.577% 52.076%;
   }
+}
+
+// borders
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}
+.circle {
+  border-radius: 50%;
 }

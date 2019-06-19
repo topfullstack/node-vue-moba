@@ -3,9 +3,9 @@
     <div class="card-header d-flex ai-center pb-3">
       <i class="iconfont" :class="`icon-${icon}`"></i>
       <div class="fs-xl flex-1 px-2">{{title}}</div>
-      <i class="iconfont icon-menu"></i>
+      <i class="iconfont icon-menu" v-if="to"></i>
     </div>
-    <div class="card-body pt-3">
+    <div class="card-body" :class="{'border-top': !clean}">
       <slot></slot>
     </div>
   </div>
@@ -15,7 +15,9 @@
 export default {
   props: {
     title: { type: String, required: true },
-    icon: { type: String, required: true }
+    icon: { type: String, required: true },
+    to: {},
+    clean: { type: Boolean }
   }
 };
 </script>
@@ -24,8 +26,9 @@ export default {
 @import "../assets/scss/_variables.scss";
 .card {
   .card-header {
-    border-bottom: 1px solid $border-color;
+    
   }
+  
   border-bottom: 1px solid $border-color;
 }
 </style>

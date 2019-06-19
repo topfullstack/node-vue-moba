@@ -76,6 +76,8 @@ module.exports = app => {
 
   })
 
+
+
   // 导入英雄数据
   router.get('/heroes/init', async (req, res) => {
     await Hero.deleteMany({})
@@ -125,6 +127,26 @@ module.exports = app => {
 
     res.send(cats)
 
+  })
+
+  // 文章详情
+  router.get('/articles/:id', async (req, res) => {
+    const data = await Article.findById(req.params.id).select('+body').lean()
+    data.related = await Article.find().where({
+      categories: { $in: data.categories }
+    }).limit(3)
+    res.send(data)
+  })
+
+  // 英雄详情
+  router.get('/heroes/:id', async (req, res) => {
+    const data = await Hero.findById(req.params.id)
+      .populate('categories items1 items2 partners.hero')
+      .lean()
+    // data.related = await Hero.find().where({
+    //   categories: { $in: data.categories }
+    // }).limit(3)
+    res.send(data)
   })
 
   app.use('/web/api', router)

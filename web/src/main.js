@@ -17,10 +17,16 @@ Vue.component('m-card', Card)
 import ListCard from './components/ListCard.vue'
 Vue.component('m-list-card', ListCard)
 
+import TopNav from './components/TopNav.vue'
+Vue.component('top-nav', TopNav)
+
 import axios from 'axios'
 Vue.prototype.$http = axios.create({
   baseURL: 'http://localhost:3000/web/api'
 })
+
+import dayjs from 'dayjs'
+Vue.filter('date', (val, format = 'MM/DD') => dayjs(val).format(format))
 
 new Vue({
   router,

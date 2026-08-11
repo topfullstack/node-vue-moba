@@ -61,3 +61,6 @@ typings/
 .next
 
 uploads
+
+# Local isolated development worktrees
+.worktrees/

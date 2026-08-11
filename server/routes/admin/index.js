@@ -3,6 +3,7 @@ module.exports = app => {
   const assert = require('http-assert')
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/AdminUser')
+  const { buildSearchFilter } = require('../../utils/search')
   const router = express.Router({
     mergeParams: true
   })
@@ -26,11 +27,12 @@ module.exports = app => {
   })
   // 资源列表
   router.get('/', async (req, res) => {
+    const filter = buildSearchFilter(req.Model.modelName, req.query.q)
     const queryOptions = {}
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
     }
-    const items = await req.Model.find().setOptions(queryOptions).limit(100)
+    const items = await req.Model.find(filter).setOptions(queryOptions).limit(100)
     res.send(items)
   })
   // 资源详情

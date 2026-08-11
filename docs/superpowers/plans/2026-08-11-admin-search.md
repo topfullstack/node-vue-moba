@@ -69,25 +69,16 @@ git commit -m "test: define safe admin search policy"
 
 **Files:**
 - Modify: `server/routes/admin/index.js`
-- Test: `server/test/search.test.js`
 
 **Interfaces:**
 - Consumes: `buildSearchFilter(req.Model.modelName, req.query.q)`.
 - Produces: the existing array response filtered by safe MongoDB conditions.
 
-- [ ] **Step 1: Add a failing source-level integration assertion**
-
-Read the route source in the test and assert that it imports `buildSearchFilter`, constructs a filter from the model name and `q`, calls `find(filter)`, and retains `.limit(100)`.
-
-- [ ] **Step 2: Run the test and verify failure**
-
-Run `npm test --prefix server`; expect the route assertion to fail.
-
-- [ ] **Step 3: Wire the helper into the route**
+- [ ] **Step 1: Wire the tested helper into the route**
 
 Import `buildSearchFilter`, construct `filter` in the list handler, and change `req.Model.find()` to `req.Model.find(filter)`. Preserve population and limit behavior.
 
-- [ ] **Step 4: Run tests and commit**
+- [ ] **Step 2: Run tests and commit**
 
 Run `npm test --prefix server`, then commit the route and test as `feat: add safe admin resource search API`.
 

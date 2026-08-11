@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>物品列表</h1>
+    <resource-search v-model="query" @search="fetch"></resource-search>
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width="240"></el-table-column>
       <el-table-column prop="name" label="物品名称"></el-table-column>
@@ -24,15 +25,24 @@
 </template>
 
 <script>
+import ResourceSearch from "../components/ResourceSearch.vue";
+
 export default {
+  components: {
+    ResourceSearch
+  },
   data() {
     return {
+      query: "",
       items: []
     };
   },
   methods: {
-    async fetch() {
-      const res = await this.$http.get("rest/items");
+    async fetch(query = this.query) {
+      this.query = query;
+      const res = await this.$http.get("rest/items", {
+        params: { q: query || undefined }
+      });
       this.items = res.data;
     },
     remove(row) {
@@ -55,4 +65,3 @@ export default {
   }
 };
 </script>
-
